@@ -68,9 +68,8 @@ def generate_val(cdf):
     if isinstance(item, list):
         item = generate_val(item)
 
-    if additional != '':
-        return eval(str(item)) + eval(additional)
-    return eval(str(item))
+    expr = additional.replace('X', str(item))
+    return eval(expr)
 
 def mk_generator(cdf_filename):
     cdf = generate_cdf(cdf_filename)
