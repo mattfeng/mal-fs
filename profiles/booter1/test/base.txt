@@ -1,0 +1,4 @@
+conditional
+randint.txt 0.8
+empirical.txt 0.9
+emp2.txt 1.0
