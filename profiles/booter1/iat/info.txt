@@ -1,0 +1,3 @@
+0 /home/pwn/PycharmProjects/mal-fs/profiles/booter1/iat/0.txt
+24 /home/pwn/PycharmProjects/mal-fs/profiles/booter1/iat/24.txt
+98 /home/pwn/PycharmProjects/mal-fs/profiles/booter1/iat/98.txt

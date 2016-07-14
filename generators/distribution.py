@@ -1,6 +1,6 @@
-import numpy as np
 import os
 from distributions.functions import *
+import time
 
 __author__ = 'mrf6'
 
@@ -27,6 +27,7 @@ def _binsearch(target, values):
     else:
         return helper(target, 0, len(values) - 1, values)
 
+
 def generate_cdf(filename):
     '''
     Generates the cumulative probability function from "filename"
@@ -37,7 +38,9 @@ def generate_cdf(filename):
     '''
 
     parent_dir = os.path.abspath(os.path.join(filename, os.pardir)) + '/'
-    cdf = []
+    probs = []
+    keys = []
+    infos = []
     with open(filename) as f:
         info = f.readline().strip()
         for line in f.readlines():
@@ -45,9 +48,11 @@ def generate_cdf(filename):
             value, prob = line[0], float(line[1])
             if line[0].endswith('.txt'):
                 value = generate_cdf(parent_dir + value)
-            cdf.append([value, prob, info])
+            keys.append(value)
+            probs.append(prob)
+            infos.append(info)
 
-    return cdf
+    return [keys, probs, infos]
 
 def generate_val(cdf):
     '''
@@ -56,10 +61,10 @@ def generate_val(cdf):
     :param cdf:
     :return: a value randomly chosen from the CDF
     '''
-    additional = cdf[0][2] # the additional instruction to run after generating a random value
+    additional = cdf[2][0] # the additional instruction to run after generating a random value
 
-    keys = [i[0] for i in cdf]
-    probs = [i[1] for i in cdf]
+    keys = cdf[0]
+    probs = cdf[1]
 
     randval = np.random.random()
     item = keys[_binsearch(randval, probs)]
@@ -69,13 +74,17 @@ def generate_val(cdf):
         item = generate_val(item)
 
     expr = additional.replace('X', str(item))
-    return eval(expr)
+    evaluated = eval(expr)
+    return evaluated
 
-def mk_generator(cdf_filename):
+def mk_generator_from_file(cdf_filename):
     cdf = generate_cdf(cdf_filename)
     while True:
         yield generate_val(cdf)
 
+def mk_generator_from_cdf(cdf):
+    while True:
+        yield generate_val(cdf)
 
 if __name__ == '__main__':
     pass

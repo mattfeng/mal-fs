@@ -1,0 +1,1 @@
+0 /home/pwn/PycharmProjects/mal-fs/profiles/booter1/dip/dip.txt

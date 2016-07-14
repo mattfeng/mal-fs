@@ -1,0 +1,2 @@
+0 /home/pwn/PycharmProjects/mal-fs/profiles/booter1/ppf/0.txt
+98 /home/pwn/PycharmProjects/mal-fs/profiles/booter1/ppf/98.txt

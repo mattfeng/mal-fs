@@ -1,3 +1,0 @@
-function
-randint(200,300) 0.5
-randint(900,1000) 1.0

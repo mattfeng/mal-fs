@@ -1,3 +1,5 @@
+import util.temporal as temporal
+
 class Flow(object):
     def __init__(self, start, duration, proto, sip, dip, sport,
                  dport, packets, bytes, iflags, sflags):
@@ -20,7 +22,7 @@ class Flow(object):
                                                      self.sip, self.dip,
                                                      self.sport, self.dport,
                                                      self.pkts, self.octs,
-                                                     self.stime, self.duration,
+                                                     temporal.sim2realtime(self.stime), self.duration,
                                                      self.iflags, self.sflags)
 
     def __repr__(self):
